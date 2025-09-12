@@ -1,0 +1,116 @@
+
+
+<section class="register-container min-h-screen flex items-center justify-center bg-gradient-to-b from-sky-100 to-sky-50">
+
+    <div class="w-2xl   ">
+    <h1 class=" text-5xl font-bold text-center text-[#1565c0] mb-4">
+        Sign Up 
+        </h1>
+        <p class="text-2xl text-gray-600 text-center mb-6">
+        Crea una cuenta para comenzar a administrar tus finanzas personales de manera eficiente y sencilla.
+        </p>
+    </div>
+    <div class="register-content bg-white p-8 rounded-2xl shadow-lg max-w-md w-full">
+        
+
+        <!-- FORMULARIO CONECTADO A ANGULAR -->
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form space-y-4">
+
+        <!-- Nombre completo -->
+        <div>
+            <input
+            type="text"
+            placeholder="Nombre completo"
+            formControlName="fullName"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <div class="text-red-600 text-sm mt-1" *ngIf="registerForm.get('fullName')?.invalid && (registerForm.get('fullName')?.dirty || registerForm.get('fullName')?.touched)">
+            <small *ngIf="registerForm.get('fullName')?.errors?.['required']">
+                El nombre es obligatorio.
+            </small>
+            </div>
+        </div>
+
+        <!-- Correo electrónico -->
+        <div>
+            <input
+            type="email"
+            placeholder="Correo electrónico"
+            formControlName="email"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <div class="text-red-600 text-sm mt-1" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            <small *ngIf="email?.errors?.['required']">El correo es obligatorio.</small>
+            <small *ngIf="email?.errors?.['email']">Ingresa un correo válido.</small>
+            </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+            <input
+            type="password"
+            placeholder="Contraseña"
+            formControlName="password"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <div class="text-red-600 text-sm mt-1" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+            <small *ngIf="password?.errors?.['required']">
+                La contraseña es obligatoria.
+            </small>
+            <small *ngIf="password?.errors?.['pattern']">
+                Debe tener mínimo 6 caracteres, una mayúscula y un número.
+            </small>
+            </div>
+        </div>
+
+        <!-- Selector de Edad -->
+        <div>
+            <label for="edad" class="block text-gray-700 font-medium mb-1">Edad</label>
+            <select
+            id="edad"
+            formControlName="edad"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+            <option value="" disabled>Selecciona tu edad</option>
+            <option *ngFor="let age of [].constructor(86); let i = index" [value]="i + 15">{{ i + 15 }}</option>
+            </select>
+            <div class="text-red-600 text-sm mt-1" *ngIf="registerForm.get('edad')?.invalid && (registerForm.get('edad')?.dirty || registerForm.get('edad')?.touched)">
+            <small>La edad es obligatoria.</small>
+            </div>
+        </div>
+
+        <!-- Selector de Género -->
+        <div>
+            <label for="genero" class="block text-gray-700 font-medium mb-1">Género</label>
+            <select
+            id="genero"
+            formControlName="genero"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+            <option value="" disabled>Selecciona tu género</option>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+            </select>
+            <div class="text-red-600 text-sm mt-1" *ngIf="registerForm.get('genero')?.invalid && (registerForm.get('genero')?.dirty || registerForm.get('genero')?.touched)">
+            <small>El género es obligatorio.</small>
+            </div>
+        </div>
+
+        <!-- Botón de registro -->
+        <button
+            type="submit"
+            [disabled]="registerForm.invalid"
+            class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-700 transition duration-300 font-medium"
+        >
+            Crear cuenta
+        </button>
+
+        <!-- Redirección a login -->
+        <p class="text-center text-gray-600 text-sm mt-4 ">
+            ¿Ya tienes una cuenta?
+            <a routerLink="/login" class="text-blue-600 hover:underline font-medium cursor-pointer">Inicia sesión</a>
+        </p>
+        </form>
+    </div>
+</section>

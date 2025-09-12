@@ -1,0 +1,64 @@
+<section class="login-container min-h-screen flex items-center justify-center bg-gradient-to-b from-sky-100 to-sky-50">
+    <div class="w-2xl">
+        <h1 class="text-5xl font-bold text-center text-[#1565c0] mb-4">
+        Inicia Sesión
+        </h1>
+        <p class="text-2xl text-gray-600 text-center mb-6">
+        Accede a tu cuenta para administrar tus gastos personales.
+        </p>
+    </div>
+
+    <div class="login-content bg-white p-8 rounded-2xl shadow-lg max-w-md w-full">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
+        <!-- Correo electrónico -->
+        <div>
+            <input
+            type="email"
+            placeholder="Correo electrónico"
+            formControlName="email"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <div class="text-red-600 text-sm mt-1" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            <small *ngIf="email?.errors?.['required']">El correo es obligatorio.</small>
+            <small *ngIf="email?.errors?.['email']">Ingresa un correo válido.</small>
+            </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+            <input
+            type="password"
+            placeholder="Contraseña"
+            formControlName="password"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <div class="text-red-600 text-sm mt-1" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+            <small *ngIf="password?.errors?.['required']">
+                La contraseña es obligatoria.
+            </small>
+            <small *ngIf="password?.errors?.['pattern']">
+                Debe tener mínimo 6 caracteres, una mayúscula y un número.
+            </small>
+            </div>
+        </div>
+
+        <!-- Botón de iniciar sesión -->
+        <button
+            type="submit"
+            [disabled]="loginForm.invalid"
+            class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-700 transition duration-300 font-medium"
+        >
+            Iniciar sesión
+        </button>
+
+        <!-- Redirección a registro -->
+        <p class="text-center text-gray-600 text-sm mt-4">
+            ¿No tienes cuenta?
+            <a routerLink="/register" class="text-blue-600 hover:underline font-medium cursor-pointer">
+            Regístrate
+            </a>
+        </p>
+        </form>
+    </div>
+</section>
